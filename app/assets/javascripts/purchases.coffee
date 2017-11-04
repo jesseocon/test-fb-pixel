@@ -28,4 +28,4 @@ $ ->
       addPurchaseConfirmation()
       console.log('purchase click happening without fbq and no db save')
 
-  $('#purchase-click').one('click', handlePurchaseClick)
+  # $('#purchase-click').one('click', handlePurchaseClick)
