@@ -8,7 +8,10 @@ $ ->
       method: 'POST'
     })
     jqXHR.done((data, textStatus, jqXHR) ->
-      console.log('the call is done: ', data)
+      fbq('track', 'Purchase', {
+        value: 90.00,
+        currency: 'USD',
+      });
     )
     jqXHR.fail((jqXHR, textStatus, errorThrown) ->
       console.log('the call did not fail: ', errorThrown)
