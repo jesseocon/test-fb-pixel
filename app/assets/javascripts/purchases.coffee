@@ -3,18 +3,23 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ -> 
   handlePurchaseClick = () ->
-    jqXHR = $.ajax({
-      url: '/purchases' 
-      method: 'POST'
-    })
-    jqXHR.done((data, textStatus, jqXHR) ->
-      fbq('track', 'Purchase', {
-        value: 90.00,
-        currency: 'USD',
-      });
-    )
-    jqXHR.fail((jqXHR, textStatus, errorThrown) ->
-      console.log('the call did not fail: ', errorThrown)
-    )
+    if window.fbq
+      jqXHR = $.ajax({
+        url: '/purchases' 
+        method: 'POST'
+      })
+
+      jqXHR.done((data, textStatus, jqXHR) ->
+        fbq('track', 'Purchase', {
+          value: 90.00,
+          currency: 'USD',
+        });
+      )
+
+      jqXHR.fail((jqXHR, textStatus, errorThrown) ->
+        console.log('the call did not fail: ', errorThrown)
+      )
+    else
+      console.log('purchase click happening without fbq and no db save')
 
   $('#purchase-click').on('click', handlePurchaseClick)
